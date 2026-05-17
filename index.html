@@ -688,7 +688,7 @@
     .env-nombre {
       position: absolute;
       left: 0; right: 0;
-      top: 42%; bottom: 0;
+      top: 58%; bottom: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -707,7 +707,7 @@
     .env-nombre-valor {
       font-family: var(--serif);
       font-style: italic;
-      font-size: min(32px, 7.5vw);
+      font-size: min(26px, 6.2vw);
       font-weight: 400;
       color: var(--accent);
       text-align: center;
@@ -909,6 +909,7 @@
       <!-- 2. Cuerpo del sobre — nombre en parte inferior -->
       <div class="env-cuerpo">
         <div class="env-nombre" id="env-nombre-body" style="display:none">
+          <span class="env-nombre-label">Para</span>
           <span class="env-nombre-valor" id="env-invitado"></span>
         </div>
       </div>
@@ -968,7 +969,7 @@
 const SOBRE = {
   logoUrl:       "sello.png", /* sello/logo — PNG transparente        */
   fondoUrl:      "fondo-sobre.jpg",          /* fondo del OVERLAY (pantalla completa) */
-  fondoSobreUrl: "imange-sobre.png",          /* fondo del SOBRE (dentro del rectángulo) ej: "interior-sobre.jpg" */
+  fondoSobreUrl: "imange-sobre.jpg",          /* fondo del SOBRE (dentro del rectángulo) ej: "interior-sobre.jpg" */
 };
 
 const BODA = {
@@ -979,10 +980,12 @@ const BODA = {
   lugarTexto: "Santa Eufemia, Córdoba",
   tagline:    "HAY MOMENTOS ÚNICOS EN LA VIDA, LLENOS DE MAGIA. QUEREMOS QUE NUESTRA BODA SEA UNO DE ELLOS Y POR ESO NOS GUSTARÍA QUE NOS ACOMPAÑES EN ESE DÍA TAN ESPECIAL",
   programa: [
-    { hora:"19:00", titulo:"Ceremonia",           desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"" },
-    { hora:"20:00", titulo:"Cóctel de bienvenida", desc:"Aperitivos y bebidas de bienvenida en los jardines de la finca.", icono:"" },
-    { hora:"21:30", titulo:"Banquete",             desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"" },
-    { hora:"00:00", titulo:"Fiesta",               desc:"¡A bailar y disfrutar toda la noche con vosotros!", icono:"" },
+    { hora:"19:00", titulo:"Ceremonia",             desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"" },
+    { hora:"20:00", titulo:"🚌 Bus a la finca",      desc:"Salida del autobús desde la iglesia hacia la finca.", icono:"" },
+    { hora:"21:00", titulo:"Cóctel de bienvenida",  desc:"Llegada a la finca. Aperitivos y bebidas de bienvenida en los jardines.", icono:"" },
+    { hora:"23:00", titulo:"Banquete",              desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"" },
+    { hora:"01:00", titulo:"Fiesta",                desc:"¡A bailar y disfrutar! La pista abre hasta que el cuerpo aguante.", icono:"" },
+    { hora:"03·05·07", titulo:"🚌 Buses de vuelta", desc:"Salidas de regreso a las 3:00, 5:00 y 7:00 de la mañana.", icono:"" },
   ],
   alojamiento: "Para que la organización sea más sencilla para todos, hemos reservado casas rurales cercanas a la finca. Si necesitas alojamiento, dinos para cuántas personas y cuántos días al confirmar tu asistencia y te damos todos los detalles sin compromiso.",
   ubicacion1: {
@@ -1002,12 +1005,22 @@ const BODA = {
 	zoom: 0.08,
   },
   faq: [
-    { p:"¿Cuál es el dress code?",           r:"Elegante. Os pedimos que vengáis arregladitos pero sin etiqueta estricta. Para las chicas, evitad el blanco por favor." },
-    { p:"¿Hay aparcamiento en la finca?",     r:"Sí, hay aparcamiento gratuito y vigilado para todos los invitados." },
-    { p:"¿Podemos llevar a los niños?",       r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos." },
-    { p:"¿Hay menú para alergias?",           r:"Sí. Indícanos cualquier restricción al confirmar asistencia y lo gestionamos sin problema." },
-    { p:"¿Hasta cuándo puedo confirmar?",     r:"Os pedimos que confirméis antes del 30 de junio de 2026. ¡Gracias!" },
-    { p:"¿Qué regalo os haría más ilusión?", r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
+    { p:"¿Cuál es el dress code?",
+      r:"Elegante. Os pedimos que vengáis arregladitos pero sin etiqueta estricta. Para las chicas, evitad el blanco por favor." },
+    { p:"¿Habrá autobús desde el pueblo a la finca?",
+      r:"Sí. El autobús sale desde la iglesia a las 20:00, tras la ceremonia. Para el regreso hay salidas a las 3:00, 5:00 y 7:00 de la mañana." },
+    { p:"¿Hay aparcamiento en la finca?",
+      r:"Sí, hay aparcamiento gratuito y vigilado para los que vayáis en coche propio." },
+    { p:"¿Podemos llevar a los niños?",
+      r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos durante la cena." },
+    { p:"¿Hay menú para alergias o intolerancias?",
+      r:"Sí. Indícanos cualquier restricción alimentaria al confirmar asistencia y lo gestionamos sin problema." },
+    { p:"¿Qué tiempo hará en septiembre?",
+      r:"En Córdoba en septiembre suele hacer calor durante el día, pero la ceremonia es a las 19h y por la madrugada refresca. Llevad algo de abrigo ligero para la fiesta." },
+    { p:"¿Hasta cuándo puedo confirmar?",
+      r:"Os pedimos confirmación antes del 30 de junio de 2026. ¡Gracias!" },
+    { p:"¿Qué regalo os haría más ilusión?",
+      r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
   ],
   formsUrl:  "https://docs.google.com/forms/d/e/1FAIpQLSfD-lUVbsurYCJ2O61wr3hS3GKvI9pePXXYkKGp8aKjYWCOjw/viewform?usp=publish-editor",
   rsvpFecha: "30 de junio de 2026",
