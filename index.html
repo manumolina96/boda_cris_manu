@@ -4,6 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Cris y Manu · 26 · IX · 2026</title>
+
+  <!-- ─── Open Graph — previsualización en WhatsApp/redes ───
+       ✏️ Cambia og:image por la URL pública de tu imagen
+          (sube una foto vuestra a GitHub y pon la URL aquí)
+          Tamaño ideal: 1200×630px
+  ──────────────────────────────────────────────────────── -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Cris y Manu · 26 · IX · 2026" />
+  <meta property="og:description" content="Hay momentos únicos en la vida, llenos de magia. Queremos que nos acompañes en nuestro día especial." />
+  <meta property="og:image"       content="https://manumolina96.github.io/boda_cris_manu/og-image.jpg" />
+  <meta property="og:url"         content="https://manumolina96.github.io/boda_cris_manu/" />
+  <meta property="og:locale"      content="es_ES" />
+
+  <!-- Twitter/X (por si acaso) -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Cris y Manu · 26 · IX · 2026" />
+  <meta name="twitter:description" content="Hay momentos únicos en la vida, llenos de magia. Queremos que nos acompañes en nuestro día especial." />
+  <meta name="twitter:image"       content="https://manumolina96.github.io/boda_cris_manu/og-image.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Dancing+Script:wght@500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -980,12 +998,10 @@ const BODA = {
   lugarTexto: "Santa Eufemia, Córdoba",
   tagline:    "HAY MOMENTOS ÚNICOS EN LA VIDA, LLENOS DE MAGIA. QUEREMOS QUE NUESTRA BODA SEA UNO DE ELLOS Y POR ESO NOS GUSTARÍA QUE NOS ACOMPAÑES EN ESE DÍA TAN ESPECIAL",
   programa: [
-    { hora:"19:00", titulo:"Ceremonia",             desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"" },
-    { hora:"20:00", titulo:"🚌 Bus a la finca",      desc:"Salida del autobús desde la iglesia hacia la finca.", icono:"" },
-    { hora:"21:00", titulo:"Cóctel de bienvenida",  desc:"Llegada a la finca. Aperitivos y bebidas de bienvenida en los jardines.", icono:"" },
-    { hora:"23:00", titulo:"Banquete",              desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"" },
-    { hora:"01:00", titulo:"Fiesta",                desc:"¡A bailar y disfrutar! La pista abre hasta que el cuerpo aguante.", icono:"" },
-    { hora:"03·05·07", titulo:"🚌 Buses de vuelta", desc:"Salidas de regreso a las 3:00, 5:00 y 7:00 de la mañana.", icono:"" },
+    { hora:"19:00", titulo:"Ceremonia",           desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"" },
+    { hora:"20:00", titulo:"Cóctel de bienvenida", desc:"Aperitivos y bebidas de bienvenida en los jardines de la finca.", icono:"" },
+    { hora:"21:30", titulo:"Banquete",             desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"" },
+    { hora:"00:00", titulo:"Fiesta",               desc:"¡A bailar y disfrutar toda la noche con vosotros!", icono:"" },
   ],
   alojamiento: "Para que la organización sea más sencilla para todos, hemos reservado casas rurales cercanas a la finca. Si necesitas alojamiento, dinos para cuántas personas y cuántos días al confirmar tu asistencia y te damos todos los detalles sin compromiso.",
   ubicacion1: {
@@ -1005,22 +1021,12 @@ const BODA = {
 	zoom: 0.08,
   },
   faq: [
-    { p:"¿Cuál es el dress code?",
-      r:"Elegante. Os pedimos que vengáis arregladitos pero sin etiqueta estricta. Para las chicas, evitad el blanco por favor." },
-    { p:"¿Habrá autobús desde el pueblo a la finca?",
-      r:"Sí. El autobús sale desde la iglesia a las 20:00, tras la ceremonia. Para el regreso hay salidas a las 3:00, 5:00 y 7:00 de la mañana." },
-    { p:"¿Hay aparcamiento en la finca?",
-      r:"Sí, hay aparcamiento gratuito y vigilado para los que vayáis en coche propio." },
-    { p:"¿Podemos llevar a los niños?",
-      r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos durante la cena." },
-    { p:"¿Hay menú para alergias o intolerancias?",
-      r:"Sí. Indícanos cualquier restricción alimentaria al confirmar asistencia y lo gestionamos sin problema." },
-    { p:"¿Qué tiempo hará en septiembre?",
-      r:"En Córdoba en septiembre suele hacer calor durante el día, pero la ceremonia es a las 19h y por la madrugada refresca. Llevad algo de abrigo ligero para la fiesta." },
-    { p:"¿Hasta cuándo puedo confirmar?",
-      r:"Os pedimos confirmación antes del 30 de junio de 2026. ¡Gracias!" },
-    { p:"¿Qué regalo os haría más ilusión?",
-      r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
+    { p:"¿Cuál es el dress code?",           r:"Elegante. Os pedimos que vengáis arregladitos pero sin etiqueta estricta. Para las chicas, evitad el blanco por favor." },
+    { p:"¿Hay aparcamiento en la finca?",     r:"Sí, hay aparcamiento gratuito y vigilado para todos los invitados." },
+    { p:"¿Podemos llevar a los niños?",       r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos." },
+    { p:"¿Hay menú para alergias?",           r:"Sí. Indícanos cualquier restricción al confirmar asistencia y lo gestionamos sin problema." },
+    { p:"¿Hasta cuándo puedo confirmar?",     r:"Os pedimos que confirméis antes del 30 de junio de 2026. ¡Gracias!" },
+    { p:"¿Qué regalo os haría más ilusión?", r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
   ],
   formsUrl:  "https://docs.google.com/forms/d/e/1FAIpQLSfD-lUVbsurYCJ2O61wr3hS3GKvI9pePXXYkKGp8aKjYWCOjw/viewform?usp=publish-editor",
   rsvpFecha: "30 de junio de 2026",
