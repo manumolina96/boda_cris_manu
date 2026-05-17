@@ -997,10 +997,12 @@ const BODA = {
   lugarTexto: "Santa Eufemia, Córdoba",
   tagline:    "HAY MOMENTOS ÚNICOS EN LA VIDA, LLENOS DE MAGIA. QUEREMOS QUE NUESTRA BODA SEA UNO DE ELLOS Y POR ESO NOS GUSTARÍA QUE NOS ACOMPAÑES EN ESE DÍA TAN ESPECIAL",
   programa: [
-    { hora:"19:00", titulo:"Ceremonia",           desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"" },
-    { hora:"20:00", titulo:"Cóctel de bienvenida", desc:"Aperitivos y bebidas de bienvenida en los jardines de la finca.", icono:"" },
-    { hora:"21:30", titulo:"Banquete",             desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"" },
-    { hora:"00:00", titulo:"Fiesta",               desc:"¡A bailar y disfrutar toda la noche con vosotros!", icono:"" },
+    { hora:"19:00", titulo:"Ceremonia",            desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"" },
+    { hora:"20:00", titulo:"🚌 Bus a la finca",     desc:"Salida del autobús desde la iglesia hacia el Cortijo Navalobos.", icono:"" },
+    { hora:"21:00", titulo:"Cóctel de bienvenida", desc:"Llegada a la finca. Aperitivos y bebidas de bienvenida en los jardines.", icono:"" },
+    { hora:"23:00", titulo:"Banquete",             desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"" },
+    { hora:"01:00", titulo:"Fiesta",               desc:"¡A bailar y disfrutar! La pista abre hasta que el cuerpo aguante.", icono:"" },
+    { hora:"3·5·7h", titulo:"🚌 Buses de vuelta",  desc:"Salidas de regreso a las 3:00, 5:00 y 7:00 de la mañana.", icono:"" },
   ],
   alojamiento: "Para que la organización sea más sencilla para todos, hemos reservado casas rurales cercanas a la finca. Si necesitas alojamiento, dinos para cuántas personas y cuántos días al confirmar tu asistencia y te damos todos los detalles sin compromiso.",
   ubicacion1: {
@@ -1020,12 +1022,22 @@ const BODA = {
 	zoom: 0.08,
   },
   faq: [
-    { p:"¿Cuál es el dress code?",           r:"Elegante. Os pedimos que vengáis arregladitos pero sin etiqueta estricta. Para las chicas, evitad el blanco por favor." },
-    { p:"¿Hay aparcamiento en la finca?",     r:"Sí, hay aparcamiento gratuito y vigilado para todos los invitados." },
-    { p:"¿Podemos llevar a los niños?",       r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos." },
-    { p:"¿Hay menú para alergias?",           r:"Sí. Indícanos cualquier restricción al confirmar asistencia y lo gestionamos sin problema." },
-    { p:"¿Hasta cuándo puedo confirmar?",     r:"Os pedimos que confirméis antes del 30 de junio de 2026. ¡Gracias!" },
-    { p:"¿Qué regalo os haría más ilusión?", r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
+    { p:"¿Cuál es el dress code?",
+      r:"Elegante. Os pedimos que vengáis arregladitos pero sin etiqueta estricta. Para las chicas, evitad el blanco por favor." },
+    { p:"¿Habrá autobús desde el pueblo a la finca?",
+      r:"Sí. El autobús sale desde la iglesia a las 20:00, tras la ceremonia. Para el regreso hay salidas a las 3:00, 5:00 y 7:00 de la mañana." },
+    { p:"¿Hay aparcamiento en la finca?",
+      r:"Sí, hay aparcamiento gratuito y vigilado para los que vayáis en coche propio." },
+    { p:"¿Podemos llevar a los niños?",
+      r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos durante la cena." },
+    { p:"¿Hay menú para alergias o intolerancias?",
+      r:"Sí. Indícanos cualquier restricción alimentaria al confirmar asistencia y lo gestionamos sin problema." },
+    { p:"¿Qué tiempo hará en septiembre?",
+      r:"En Córdoba en septiembre suele hacer calor durante el día, pero la ceremonia es a las 19h y por la madrugada refresca bastante. Llevad algo de abrigo ligero para la fiesta." },
+    { p:"¿Hasta cuándo puedo confirmar?",
+      r:"Os pedimos confirmación antes del 30 de junio de 2026. ¡Gracias!" },
+    { p:"¿Qué regalo os haría más ilusión?",
+      r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
   ],
   formsUrl:  "https://docs.google.com/forms/d/e/1FAIpQLSfD-lUVbsurYCJ2O61wr3hS3GKvI9pePXXYkKGp8aKjYWCOjw/viewform?usp=publish-editor",
   rsvpFecha: "30 de junio de 2026",
@@ -1150,10 +1162,13 @@ const BODA = {
 		<img src="foto-historia_2.jpg" alt="Cris y Manu">
     </div>
     <div class="body-text reveal">
-      <!-- ✏️ EDITA AQUÍ vuestro texto de historia -->
-      <p>Nos conocimos en un momento inesperado, de esos que no se planean pero que lo cambian todo. Desde esa primera conversación supimos que había algo especial entre nosotros.</p>
-      <p>Años después, viajes compartidos, proyectos en común y miles de pequeños momentos cotidianos nos han traído hasta aquí: al día en que diremos que sí ante las personas que más queremos.</p>
-      <p>El 26 de septiembre de 2026 será el inicio de nuestro siguiente capítulo y nos hace muy felices vivirlo junto a vosotros.</p>
+      <p>Nos conocimos siendo adolescentes, en 2015. Entonces no lo sabíamos, pero ya éramos importantes el uno para el otro.</p>
+      <p>Durante años nos acompañamos como amigos, en los buenos momentos y en los que no lo eran tanto. Estábamos ahí. Siempre.</p>
+      <p>En septiembre de 2018 viajamos juntos a Polonia. Y algo que ya existía, pero que ninguno de los dos había dicho en voz alta, por fin encontró su momento. Fue el principio de todo.</p>
+      <p>Desde entonces hemos construido una vida juntos, paso a paso. Jauja, Córdoba, Santa Eufemia. Cada sitio tiene algo nuestro. En este tiempo también ha llegado Draco, nuestro perro, y con él, la sensación de que ya éramos una familia. Hemos cumplido sueños que parecían lejanos, nos hemos comprado una furgo para seguir explorando el mundo y hemos conseguido volver al pueblo, una de nuestras metas.</p>
+      <p>Ahora queremos hacer oficial lo que ya sentimos hace tiempo.</p>
+      <p>Vosotros habéis sido parte de este camino, algunos desde el principio, otros en el momento justo. Hoy os pedimos que estéis con nosotros en el paso más importante.</p>
+      <p>Gracias por acompañarnos hasta aquí. Ojalá sigáis haciéndolo.</p>
     </div>
   </div>
 </section>
