@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cris y Manu · 26 · IX · 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Dancing+Script:wght@500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─────────────────────────────────────────────
+       PALETA — igual que la invitación
+    ─────────────────────────────────────────────── */
+    :root {
+      --cream:    #FDF8F2;
+      --cream2:   #F5EDE0;
+      --text:     #3D2B1F;
+      --muted:    #8B7060;
+      --accent:   #C4735A;   /* terracota principal */
+      --accent2:  #D4956A;   /* melocotón */
+      --green:    #7B8A4A;   /* verde oliva */
+      --line:     #E8D8C8;
+      --dark:     #3D2B1F;
+      --serif:    'Cormorant Garamond', Georgia, serif;
+      --script:   'Dancing Script', cursive;
+      --sans:     'Jost', sans-serif;
+    }
+
+    /* ── RESET ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+
+    /* ── NAV ─────────────────────────────────────── */
+    nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 300;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(253,248,242,.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 400;
+      letter-spacing: .04em;
+      text-decoration: none;
+      color: var(--accent);
+    }
+    .nav-logo em { font-style: italic; color: var(--accent); }
+    .nav-links { display: none; list-style: none; gap: 24px; }
+    .nav-links a {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+    .ham { background: none; border: none; cursor: pointer; display: flex; flex-direction: column; gap: 5px; padding: 4px; }
+    .ham span { display: block; width: 22px; height: 1px; background: var(--text); transition: .25s; }
+    .ham.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .ham.open span:nth-child(2) { opacity: 0; }
+    .ham.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .nav-mob {
+      display: none;
+      position: fixed;
+      top: 54px; left: 0; right: 0;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+      padding: 8px 20px 20px;
+      z-index: 299;
+    }
+    .nav-mob.open { display: block; }
+    .nav-mob a {
+      display: block;
+      padding: 13px 0;
+      font-size: 12px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-mob a:last-child { border-bottom: none; }
+
+    /* ── HERO ────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 16px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* ── FLORES LATERALES (imágenes) ─────────────────
+       Pon flores-izquierda.png y flores-derecha.png
+       en la misma carpeta — PNG con fondo transparente
+    ──────────────────────────────────────────────── */
+    .botanical-left, .botanical-right {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 110px;
+      pointer-events: none;
+      object-fit: contain;
+      object-position: center;
+    }
+    .botanical-left  { left: 0; }
+    .botanical-right { right: 0; }
+    @media (min-width: 600px) {
+      .botanical-left, .botanical-right { width: 160px; }
+    }
+
+    /* ── SELLO / MONOGRAMA (imagen) ───────────────────
+       Pon sello.png en la misma carpeta
+    ──────────────────────────────────────────────── */
+    .hero-monogram {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      object-fit: contain;
+      opacity: 0;
+      animation: fadeUp .7s .1s forwards;
+    }
+    /* fallback si no hay imagen de sello */
+    .hero-monogram-fallback {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp .7s .1s forwards;
+    }
+    .hero-monogram-fallback span:first-child {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .hero-monogram-fallback span:last-child {
+      font-size: 8px;
+      letter-spacing: .15em;
+      color: var(--accent);
+      opacity: .7;
+      margin-top: 3px;
+    }
+    .hero-tagline {
+      font-family: var(--serif);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      max-width: 320px;
+      line-height: 1.9;
+      margin: 0 auto 24px;
+      opacity: 0;
+      animation: fadeUp .7s .2s forwards;
+    }
+    .hero-nombre1, .hero-nombre2 {
+      font-family: var(--serif);
+      font-size: clamp(64px, 20vw, 120px);
+      font-weight: 400;
+      letter-spacing: .1em;
+      line-height: 1;
+      color: var(--accent);
+      text-transform: uppercase;
+      opacity: 0;
+    }
+    .hero-nombre1 { animation: fadeUp .7s .3s forwards; }
+    .hero-y-script {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(28px, 6vw, 44px);
+      color: var(--accent);
+      margin: -8px 0;
+      letter-spacing: .04em;
+      opacity: 0;
+      animation: fadeUp .7s .4s forwards;
+    }
+    .hero-nombre2 { animation: fadeUp .7s .5s forwards; }
+    .hero-fecha {
+      font-size: 13px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 20px auto 8px;
+      opacity: 0;
+      animation: fadeUp .7s .6s forwards;
+    }
+    .hero-sep {
+      width: 1px;
+      height: 20px;
+      background: var(--line);
+      margin: 0 auto 8px;
+      opacity: 0;
+      animation: fadeUp .7s .65s forwards;
+    }
+    .hero-lugar {
+      font-family: var(--serif);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--muted);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp .7s .7s forwards;
+    }
+
+    /* countdown */
+    .countdown {
+      display: flex;
+      gap: clamp(10px, 3vw, 28px);
+      align-items: flex-start;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeUp .7s .8s forwards;
+    }
+    .cd-unit { text-align: center; }
+    .cd-num {
+      display: block;
+      font-family: var(--serif);
+      font-size: clamp(34px, 9vw, 54px);
+      font-weight: 300;
+      line-height: 1;
+      color: var(--text);
+    }
+    .cd-lbl {
+      display: block;
+      font-size: 8px;
+      font-weight: 500;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .cd-sep {
+      font-family: var(--serif);
+      font-size: clamp(24px, 6vw, 40px);
+      color: var(--line);
+      line-height: 1.3;
+    }
+
+    /* botones calendario */
+    .cal-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeUp .7s .9s forwards;
+    }
+    .btn-cal {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 16px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      color: var(--muted);
+      background: transparent;
+      transition: border-color .2s, color .2s;
+      cursor: pointer;
+      font-family: var(--sans);
+    }
+    .btn-cal:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── FOTO DE SECCIÓN ──────────────────────────── */
+    .section-photo {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: var(--cream2);
+      position: relative;
+    }
+    .section-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .section-photo-ph {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: var(--accent);
+      opacity: .25;
+    }
+    .section-photo-ph p {
+      font-size: 10px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
+    /* divisor botánico entre foto y contenido */
+    .botanical-divider {
+      text-align: center;
+      margin: -1px 0 0;
+      line-height: 0;
+    }
+    .botanical-divider svg { display: inline-block; }
+
+    /* ── SECCIÓN BASE ─────────────────────────────── */
+    .section {
+      padding: 56px 24px 72px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .section-full { background: var(--cream2); }
+    .section-full .section { margin: 0 auto; }
+    .section-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 8vw, 54px);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .section-title em { font-style: italic; color: var(--accent); }
+    .divider {
+      width: 36px; height: 1px;
+      background: var(--accent);
+      opacity: .4;
+      margin-bottom: 28px;
+    }
+    .body-text { color: var(--muted); font-size: 15px; line-height: 1.85; }
+    .body-text p + p { margin-top: 14px; }
+
+    /* ── HISTORIA ─────────────────────────────────── */
+    .historia-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .historia-foto-inline {
+      width: 100%;
+      max-width: 300px;
+      aspect-ratio: 3/4;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--cream2);
+      border: 1px solid var(--line);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      opacity: .3;
+      font-size: 10px;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 20px;
+    }
+
+    /* ── PROGRAMA ─────────────────────────────────── */
+    .programa-lista { margin-top: 8px; }
+    .programa-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      padding: 22px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .programa-item:first-child { border-top: 1px solid var(--line); }
+    .programa-ilustracion {
+      width: 58px;
+      height: 58px;
+      flex-shrink: 0;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .programa-ilustracion img { width: 100%; height: 100%; object-fit: cover; }
+    .programa-ilustracion svg { opacity: .3; }
+    .programa-info { flex: 1; }
+    .programa-hora {
+      display: block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3px;
+    }
+    .programa-tit {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 3px;
+    }
+    .programa-desc { font-size: 14px; color: var(--muted); }
+
+    /* ── UBICACIONES ──────────────────────────────── */
+    .ubicaciones-grid { display: flex; flex-direction: column; gap: 36px; margin-top: 8px; }
+    .ubicacion-nombre {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .ubicacion-dir { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .mapa-wrap {
+      width: 100%; height: 220px;
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      margin-bottom: 12px;
+    }
+    .mapa-wrap iframe { width: 100%; height: 100%; border: none; }
+    .btn-gmaps {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 18px;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      color: var(--accent);
+      transition: background .2s, color .2s;
+    }
+    .btn-gmaps:hover { background: var(--accent); color: #fff; }
+
+    /* ── FAQ ──────────────────────────────────────── */
+    .faq-item { border-top: 1px solid var(--line); }
+    .faq-item:last-child { border-bottom: 1px solid var(--line); }
+    .faq-btn {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+    .faq-btn span { font-family: var(--serif); font-size: 18px; font-weight: 400; color: var(--text); }
+    .faq-ico { width: 16px; height: 16px; flex-shrink: 0; color: var(--accent); transition: transform .3s; }
+    .faq-item.open .faq-ico { transform: rotate(45deg); }
+    .faq-resp { max-height: 0; overflow: hidden; transition: max-height .35s ease; }
+    .faq-item.open .faq-resp { max-height: 200px; }
+    .faq-resp p { font-size: 14px; color: var(--muted); padding-bottom: 18px; }
+
+    /* ── RSVP ─────────────────────────────────────── */
+    #rsvp {
+      text-align: center;
+      padding: 80px 24px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+    #rsvp .section-label { color: var(--accent2); }
+    #rsvp .section-title { color: var(--cream); max-width: 400px; margin: 0 auto 14px; }
+    #rsvp p { color: rgba(253,248,242,.5); font-size: 14px; margin-bottom: 28px; }
+    .btn-rsvp {
+      display: inline-block;
+      padding: 15px 40px;
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: var(--cream);
+      color: var(--dark);
+      border-radius: 2px;
+      border: 1px solid transparent;
+      transition: background .25s, color .25s, border-color .25s;
+    }
+    .btn-rsvp:hover { background: transparent; color: var(--cream); border-color: rgba(253,248,242,.3); }
+
+    /* flores decorativas en RSVP */
+    .rsvp-floral-left, .rsvp-floral-right {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 90px;
+      opacity: .15;
+      pointer-events: none;
+      object-fit: contain;
+      object-position: center;
+    }
+    .rsvp-floral-left  { left: 0; }
+    .rsvp-floral-right { right: 0; }
+
+    /* ── FOOTER ───────────────────────────────────── */
+    footer { text-align: center; padding: 28px 20px; border-top: 1px solid var(--line); }
+    footer p { font-family: var(--serif); font-size: 13px; color: var(--muted); }
+    footer em { font-style: italic; color: var(--accent); }
+
+    /* ── ANIMACIONES ──────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(14px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    .reveal { opacity:0; transform:translateY(18px); transition:opacity .65s,transform .65s; }
+    .reveal.vis { opacity:1; transform:none; }
+
+    /* ── TABLET / DESKTOP ─────────────────────────── */
+    @media (min-width: 600px) {
+      nav { padding: 0 40px; }
+      .ham { display: none; }
+      .nav-links { display: flex; }
+      .section-photo { height: 300px; }
+      .historia-grid { flex-direction: row; align-items: center; gap: 48px; }
+      .historia-foto-inline { max-width: 100%; flex: 1; }
+      .ubicaciones-grid { flex-direction: row; }
+      .ubicacion-card { flex: 1; }
+    }
+
+    /* ═══════════════════════════════════════════════
+       OVERLAY
+    ═══════════════════════════════════════════════ */
+    #sobre-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--cream2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      cursor: pointer;
+      transition: opacity .7s;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    #sobre-overlay.salir { opacity: 0; pointer-events: none; }
+
+    .env-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp .5s .3s forwards;
+    }
+
+    /* ── Escena perspectiva ── */
+    .env-escena {
+      perspective: 900px;
+      perspective-origin: 50% 40%;
+      opacity: 0;
+      animation: fadeUp .6s .55s forwards;
+    }
+
+    /* ── Contenedor sobre ─────────────────────────────
+       Las capas, de abajo a arriba:
+         1. env-carta   (z 2)  — oculta inicialmente
+         2. env-cuerpo  (z 5)  — tapa la carta cuando está cerrada
+         3. env-tapa    (z 10) — rota hacia atrás al abrir
+         4. env-sello   (z 15) — desaparece al abrir
+    ──────────────────────────────────────────────── */
+    .env-sobre {
+      position: relative;
+      width: min(300px, 84vw);
+      height: min(200px, 56vw);
+    }
+
+    /* 1 — Carta interior */
+    .env-carta {
+      position: absolute;
+      inset: 10% 8% 8%;          /* empieza dentro del sobre */
+      background: var(--cream);
+      border: 1px solid #e8d8c8;
+      border-radius: 2px;
+      box-shadow: 0 -3px 14px rgba(61,43,31,.06);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      z-index: 2;
+      /* OCULTA: opacidad 0, dentro del sobre */
+      opacity: 0;
+      transform: translateY(0);
+      transition:
+        transform .85s .25s cubic-bezier(.22,1,.36,1),
+        opacity   .4s  .25s;
+    }
+    .env-carta-tit {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: min(18px, 5vw);
+      color: var(--accent);
+    }
+    .env-carta-sub {
+      font-family: var(--sans);
+      font-size: min(8px, 2.2vw);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* 2 — Cuerpo del sobre (ENCIMA de la carta) */
+    .env-cuerpo {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: #fff;
+      border: 1px solid #e8d8c8;
+      border-radius: 3px;
+      box-shadow:
+        0 12px 48px rgba(61,43,31,.12),
+        0 3px  10px rgba(61,43,31,.07);
+      overflow: hidden;  /* recorta los gradientes de pliegue */
+    }
+    /* Pliegues interiores: triángulos laterales y V inferior */
+    .env-cuerpo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(135deg, var(--cream2) 49%, transparent 50%) 0   0   / 50% 54% no-repeat,
+        linear-gradient(225deg, var(--cream2) 49%, transparent 50%) 100% 0   / 50% 54% no-repeat,
+        linear-gradient(45deg,  var(--cream2) 49%, transparent 50%) 0   100% / 50% 46% no-repeat,
+        linear-gradient(315deg, var(--cream2) 49%, transparent 50%) 100% 100% / 50% 46% no-repeat;
+      opacity: .55;
+      pointer-events: none;
+    }
+    /* Nombre del invitado, centrado en la mitad inferior */
+    .env-nombre {
+      position: absolute;
+      left: 0; right: 0;
+      /* empieza desde el 50% hacia abajo (debajo de la tapa) */
+      top: 50%; bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+    }
+    .env-nombre-label {
+      font-family: var(--sans);
+      font-size: min(9px, 2.4vw);
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .env-nombre-valor {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: min(20px, 5.5vw);
+      font-weight: 400;
+      color: var(--text);
+      text-align: center;
+      padding: 0 20px;
+      line-height: 1.3;
+    }
+
+    /* 3 — Tapa (pentágono SVG, se pliega hacia arriba) */
+    .env-tapa {
+      position: absolute;
+      top: -1px; left: -1px; right: -1px;
+      height: 52%;
+      z-index: 10;
+      transform-origin: top center;
+      transform: scaleY(1);
+      transition: transform .55s cubic-bezier(.4,0,.2,1),
+                  opacity   .3s  .1s;
+    }
+    .env-tapa-front {
+      position: absolute;
+      inset: 0;
+    }
+    .env-tapa-front svg {
+      width: 100%; height: 100%; display: block;
+    }
+    /* la cara trasera ya no hace falta */
+    .env-tapa-back { display: none; }
+
+    /* 4 — Sello lacre */
+    .env-sello {
+      position: absolute;
+      left: 50%;
+      /* en el borde inferior de la tapa: 52% - mitad del sello */
+      top: calc(52% - 22px);
+      transform: translateX(-50%);
+      z-index: 15;
+      transition: opacity .3s, transform .3s;
+    }
+    .env-sello-disco {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 2px 8px rgba(196,115,90,.4),
+        0 0 0 3px rgba(196,115,90,.15);
+    }
+    .env-sello-disco span {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    /* ── "Para" en la solapa ── */
+    .env-tapa-para {
+      position: absolute;
+      left: 0; right: 0;
+      /* centro de la zona triangular superior de la tapa */
+      top: 18%;
+      text-align: center;
+      pointer-events: none;
+      backface-visibility: hidden; /* se oculta al voltear la tapa */
+    }
+    .env-tapa-para-label {
+      display: block;
+      font-family: var(--sans);
+      font-size: min(8px, 2.2vw);
+      font-weight: 500;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .env-tapa-para-valor {
+      display: block;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: min(17px, 4.8vw);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.2;
+      padding: 0 16px;
+    }
+
+    /* ── Sello imagen ── */
+    .env-sello-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(196,115,90,.4), 0 0 0 3px rgba(196,115,90,.15);
+      display: block;
+    }
+
+    /* ── Fondo con imagen (overlay) ── */
+    #sobre-overlay.con-fondo {
+      background-size: cover;
+      background-position: center;
+    }
+    #sobre-overlay.con-fondo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(245,237,224,.82);
+      backdrop-filter: blur(3px);
+    }
+    #sobre-overlay.con-fondo > * {
+      position: relative; /* encima del overlay */
+    }
+    /* ── Estado ABIERTO ── */
+    .env-sobre.abierto .env-tapa {
+      transform: scaleY(0);
+      opacity: 0;
+    }
+    .env-sobre.abierto .env-sello {
+      opacity: 0;
+      transform: translateX(-50%) scale(.3);
+    }
+    .env-sobre.abierto .env-carta {
+      opacity: 1;
+      transform: translateY(-38%);
+    }
+    }
+
+    /* ── Hints ── */
+    .env-hint {
+      margin-top: 28px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      opacity: 0;
+      animation: fadeUp .5s 1.1s forwards;
+      transition: opacity .3s;
+    }
+    .env-punto {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulso 1.6s 1.5s infinite;
+      flex-shrink: 0;
+    }
+    @keyframes pulso {
+      0%,100% { opacity:.2; transform:scale(.6); }
+      50%      { opacity:1;  transform:scale(1.3); }
+    }
+    .env-hint2 {
+      margin-top: 28px;
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity .5s .8s;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .env-sobre.abierto ~ * .env-hint2,
+    .env-hint2.vis { opacity: 1; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     SOBRE
+     URL personalizada: ?para=Juan%20y%20Mar%C3%ADa
+══════════════════════════════════════════════ -->
+<div id="sobre-overlay">
+
+  <p class="env-label">Tenéis una invitación</p>
+
+  <div class="env-escena">
+    <div class="env-sobre" id="env-sobre">
+
+      <!-- 1. Carta (oculta, sale al abrir) -->
+      <div class="env-carta">
+        <span class="env-carta-tit">Cris y Manu</span>
+        <span class="env-carta-sub">26 · IX · 2026 · Santa Eufemia</span>
+      </div>
+
+      <!-- 2. Cuerpo del sobre -->
+      <div class="env-cuerpo">
+        <!-- el nombre va en la solapa, el cuerpo queda limpio -->
+      </div>
+
+      <!-- 3. Tapa con "Para [nombre]" dentro -->
+      <div class="env-tapa">
+        <div class="env-tapa-front">
+          <svg viewBox="0 0 300 156" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+            <polygon
+              points="0,0 300,0 300,14 150,150 0,14"
+              fill="white" stroke="#e8d8c8" stroke-width="1.2" stroke-linejoin="round"/>
+            <line x1="1"   y1="14" x2="150" y2="149" stroke="#e8d8c8" stroke-width="1" opacity=".6"/>
+            <line x1="299" y1="14" x2="150" y2="149" stroke="#e8d8c8" stroke-width="1" opacity=".6"/>
+          </svg>
+          <!-- "Para nombre" — solo visible si hay parámetro ?para= -->
+          <div class="env-tapa-para" id="env-tapa-para" style="display:none">
+            <span class="env-tapa-para-label">Para</span>
+            <span class="env-tapa-para-valor" id="env-tapa-nombre"></span>
+          </div>
+        </div>
+        <div class="env-tapa-back"></div>
+      </div>
+
+      <!-- 4. Sello / logo -->
+      <div class="env-sello" id="env-sello">
+        <!--
+          ✏️ Logo: se rellena automáticamente desde SOBRE.logoUrl
+             Si está vacío muestra el texto C♡M de fallback
+        -->
+        <div id="env-sello-inner">
+          <!-- JS lo rellena -->
+        </div>
+      </div>
+
+    </div><!-- /env-sobre -->
+  </div><!-- /env-escena -->
+
+  <div style="position:relative;height:52px;margin-top:0">
+    <p class="env-hint" id="env-hint1">
+      <span class="env-punto"></span>Toca para abrir
+    </p>
+    <p class="env-hint2" id="env-hint2" style="position:absolute;top:0;left:50%;transform:translateX(-50%);white-space:nowrap">
+      Toca para entrar →
+    </p>
+  </div>
+
+</div><!-- /sobre-overlay -->
+
+
+<!-- ═══════════════════════════════════════════════════
+  ✏️  CONFIGURACIÓN — edita solo este bloque
+═══════════════════════════════════════════════════ -->
+<script>
+/* ── Configuración del SOBRE ──────────────────────────
+   logoUrl:  ruta a vuestro logo/sello (PNG transparente)
+             Exporta el sello de Canva: selecciónalo →
+             clic derecho → Descargar selección → PNG
+   fondoUrl: imagen de fondo del overlay (JPG/PNG)
+             Puede ser la invitación, una foto, o déjalo
+             vacío ("") para fondo liso
+──────────────────────────────────────────────────── */
+const SOBRE = {
+  logoUrl:  "sello.png",           /* ej: "sello.png"       */
+  fondoUrl: "fondo-sobre.jpg",           /* ej: "fondo-sobre.jpg" */
+};
+
+const BODA = {
+  nombre1:    "Cris",
+  nombre2:    "Manu",
+  fechaTexto: "26 · Septiembre · 2026",
+  fechaISO:   "2026-09-26T19:00:00",
+  lugarTexto: "Santa Eufemia, Córdoba",
+  tagline:    "HAY MOMENTOS ÚNICOS EN LA VIDA, LLENOS DE MAGIA. QUEREMOS QUE NUESTRA BODA SEA UNO DE ELLOS Y POR ESO NOS GUSTARÍA QUE NOS ACOMPAÑES EN ESE DÍA TAN ESPECIAL",
+  programa: [
+    { hora:"19:00", titulo:"Ceremonia",           desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"" },
+    { hora:"20:00", titulo:"Cóctel de bienvenida", desc:"Aperitivos y bebidas de bienvenida en los jardines de la finca.", icono:"" },
+    { hora:"21:30", titulo:"Banquete",             desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"" },
+    { hora:"00:00", titulo:"Fiesta",               desc:"¡A bailar y disfrutar toda la noche con vosotros!", icono:"" },
+  ],
+  alojamiento: "Para que la organización sea más sencilla para todos, hemos reservado casas rurales cercanas a la finca. Si necesitas alojamiento, dinos para cuántas personas y cuántos días al confirmar tu asistencia y te damos todos los detalles sin compromiso.",
+  ubicacion1: {
+    nombre:"Ceremonia",
+    descripcion:"Iglesia de Nuestra Señora de la Encarnación",
+    direccion:"Plaza de la Iglesia, Santa Eufemia, Córdoba",
+    lat:38.59613116652482, lng:-4.904900322887688, 
+    gmapsUrl:"https://maps.app.goo.gl/WK8pfmjdzHRLcJy8A",
+	zoom: 0.003,
+  },
+  ubicacion2: {
+    nombre:"Celebración",
+    descripcion:"Cortijo Rural Navalobos",
+    direccion:"Pozoblanco, Córdoba",   /* ← pon la dirección exacta */
+    lat:38.27612672749459, lng:-4.751175071740092, 
+    gmapsUrl:"https://maps.app.goo.gl/MWhTdatKtGPijjqv6",
+	zoom: 0.08,
+  },
+  faq: [
+    { p:"¿Cuál es el dress code?",           r:"Elegante. Os pedimos que vengáis arregladitos pero sin etiqueta estricta. Para las chicas, evitad el blanco por favor." },
+    { p:"¿Hay aparcamiento en la finca?",     r:"Sí, hay aparcamiento gratuito y vigilado para todos los invitados." },
+    { p:"¿Podemos llevar a los niños?",       r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos." },
+    { p:"¿Hay menú para alergias?",           r:"Sí. Indícanos cualquier restricción al confirmar asistencia y lo gestionamos sin problema." },
+    { p:"¿Hasta cuándo puedo confirmar?",     r:"Os pedimos que confirméis antes del 30 de junio de 2026. ¡Gracias!" },
+    { p:"¿Qué regalo os haría más ilusión?", r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
+  ],
+  formsUrl:  "https://docs.google.com/forms/d/e/1FAIpQLSfD-lUVbsurYCJ2O61wr3hS3GKvI9pePXXYkKGp8aKjYWCOjw/viewform?usp=publish-editor",
+  rsvpFecha: "30 de junio de 2026",
+};
+</script>
+<!-- ═══════════════════════════════════════════════════
+  FIN CONFIGURACIÓN
+═══════════════════════════════════════════════════ -->
+
+
+
+
+
+
+<!-- ── NAV ─────────────────────────────────────────── -->
+<nav>
+  <a class="nav-logo" href="#hero" id="nav-logo">Cris <em>y</em> Manu</a>
+  <ul class="nav-links">
+    <li><a href="#historia">Historia</a></li>
+    <li><a href="#programa">Programa</a></li>
+    <li><a href="#alojamiento">Alojarse</a></li>
+    <li><a href="#ubicaciones">Ubicaciones</a></li>
+    <li><a href="#faq">Preguntas</a></li>
+    <li><a href="#rsvp">Confirmar</a></li>
+  </ul>
+  <button class="ham" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mob" id="nav-mob">
+  <a href="#historia"    onclick="closeMob()">Nuestra historia</a>
+  <a href="#programa"    onclick="closeMob()">Programa</a>
+  <a href="#alojamiento" onclick="closeMob()">Dónde alojarse</a>
+  <a href="#ubicaciones" onclick="closeMob()">Ubicaciones</a>
+  <a href="#faq"         onclick="closeMob()">Preguntas frecuentes</a>
+  <a href="#rsvp"        onclick="closeMob()">Confirmar asistencia</a>
+</div>
+
+
+<!-- ── HERO ───────────────────────────────────────── -->
+<section id="hero">
+
+  <!--
+    🌸 FLORES LATERALES
+    ✏️ Pon aquí tus propias imágenes florales (PNG con fondo transparente).
+       Cómo exportarlas desde Canva:
+       1. Abre tu invitación en Canva
+       2. Selecciona solo los elementos florales del lado izquierdo
+       3. Clic derecho → "Descargar selección" → PNG con fondo transparente
+       4. Guarda el archivo como "flores-izquierda.png" en esta carpeta
+       5. Para las flores del lado derecho, descarga igual y guarda como "flores-derecha.png"
+          (o usa la misma imagen — la web la espeja automáticamente si usas la misma)
+       6. Descomenta las líneas <img> de abajo
+  -->
+  <!-- <img class="botanical-left"  src="flores-izquierda.png" alt="" /> -->
+  <!-- <img class="botanical-right" src="flores-derecha.png"   alt="" /> -->
+
+  <!--
+    🔵 SELLO / MONOGRAMA
+    ✏️ Exporta el sello circular (C♡M) de tu invitación desde Canva:
+       1. Selecciona solo el sello
+       2. Descarga como PNG con fondo transparente
+       3. Guarda como "sello.png" en esta carpeta
+       4. Descomenta la línea <img> de abajo y comenta/borra el div .hero-monogram-fallback
+  -->
+  <img class="hero-monogram" src="sello.png" alt="C ♡ M" />
+
+  <p class="hero-tagline" id="hero-tagline"></p>
+
+  <p class="hero-nombre1" id="hero-n1"></p>
+  <p class="hero-y-script">y</p>
+  <p class="hero-nombre2" id="hero-n2"></p>
+
+  <p class="hero-fecha" id="hero-fecha"></p>
+  <div class="hero-sep"></div>
+  <p class="hero-lugar" id="hero-lugar"></p>
+
+  <!-- COUNTDOWN -->
+  <div class="countdown" id="countdown">
+    <div class="cd-unit"><span class="cd-num" id="cd-d">--</span><span class="cd-lbl">Días</span></div>
+    <span class="cd-sep">·</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-h">--</span><span class="cd-lbl">Horas</span></div>
+    <span class="cd-sep">·</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-m">--</span><span class="cd-lbl">Min</span></div>
+    <span class="cd-sep">·</span>
+    <div class="cd-unit"><span class="cd-num" id="cd-s">--</span><span class="cd-lbl">Seg</span></div>
+  </div>
+
+  <div class="cal-btns">
+    <a id="btn-gcal" href="#" target="_blank" rel="noopener" class="btn-cal">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Google Calendar
+    </a>
+    <button id="btn-ical" class="btn-cal">
+      <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      Apple / Outlook (.ics)
+    </button>
+  </div>
+
+</section>
+
+
+<!-- ── HISTORIA ────────────────────────────────────── -->
+
+<!-- FOTO SECCIÓN HISTORIA
+     ✏️ Para añadir una foto vuestra:
+        1. Pon el archivo en la misma carpeta (ej: "foto-historia.jpg")
+        2. Descomenta la línea <img> y escribe el nombre del archivo
+        3. Comenta o borra el div .section-photo-ph
+-->
+<div class="section-photo">
+  <img src="foto-historia.jpg" alt="Cris y Manu">
+
+</div>
+
+<section id="historia" class="section">
+  <div class="reveal">
+    <p class="section-label">Nuestra historia</p>
+    <h2 class="section-title">Así <em>empezó</em> todo</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="historia-grid">
+    <div class="historia-foto-inline reveal">
+		<img src="foto-historia_2.jpg" alt="Cris y Manu">
+    </div>
+    <div class="body-text reveal">
+      <!-- ✏️ EDITA AQUÍ vuestro texto de historia -->
+      <p>Nos conocimos en un momento inesperado, de esos que no se planean pero que lo cambian todo. Desde esa primera conversación supimos que había algo especial entre nosotros.</p>
+      <p>Años después, viajes compartidos, proyectos en común y miles de pequeños momentos cotidianos nos han traído hasta aquí: al día en que diremos que sí ante las personas que más queremos.</p>
+      <p>El 26 de septiembre de 2026 será el inicio de nuestro siguiente capítulo y nos hace muy felices vivirlo junto a vosotros.</p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── PROGRAMA ─────────────────────────────────────── -->
+
+<div class="section-photo">
+  <img src="foto-programa.jpg" alt="Cris y Manu">
+</div>
+
+<div class="section-full">
+<section id="programa" class="section">
+  <div class="reveal">
+    <p class="section-label">El gran día</p>
+    <h2 class="section-title">Programa</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="programa-lista reveal" id="programa-lista"></div>
+</section>
+</div>
+
+
+<!-- ── ALOJAMIENTO ──────────────────────────────────── -->
+
+<div class="section-photo">
+  <img src="foto-alojamiento.jpg" alt="Cris y Manu">
+</div>
+
+<section id="alojamiento" class="section">
+  <div class="reveal">
+    <p class="section-label">Para quedarse tranquilos</p>
+    <h2 class="section-title">Dónde <em>alojarse</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div class="body-text reveal" id="alojamiento-txt"></div>
+</section>
+
+
+<!-- ── UBICACIONES ─────────────────────────────────── -->
+
+<div class="section-photo">
+  <img src="foto-ubicacion.jpg" alt="Cris y Manu">
+</div>
+
+<div class="section-full">
+<section id="ubicaciones" class="section">
+  <div class="reveal">
+    <p class="section-label">Cómo llegar</p>
+    <h2 class="section-title">Ubicaciones</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="ubicaciones-grid reveal" id="ubicaciones-grid"></div>
+</section>
+</div>
+
+
+<!-- ── FAQ ─────────────────────────────────────────── -->
+
+<div class="section-photo">
+  <img src="foto-faq.jpg" alt="Cris y Manu">
+</div>
+
+<section id="faq" class="section">
+  <div class="reveal">
+    <p class="section-label">Todo lo que necesitas saber</p>
+    <h2 class="section-title">Preguntas <em>y respuestas</em></h2>
+    <div class="divider"></div>
+  </div>
+  <div id="faq-lista" class="reveal"></div>
+</section>
+
+
+<!-- ── RSVP ────────────────────────────────────────── -->
+<section id="rsvp">
+  <!-- flores decorativas opcionales — mismas imágenes que el hero -->
+  <!-- <img class="rsvp-floral-left"  src="flores-izquierda.png" alt="" /> -->
+  <!-- <img class="rsvp-floral-right" src="flores-derecha.png"   alt="" /> -->
+
+  <p class="section-label reveal">Confirma tu asistencia</p>
+  <h2 class="section-title reveal">¿Vendrás a<br>nuestra <em>boda</em>?</h2>
+  <p class="reveal" id="rsvp-txt"></p>
+  <a id="btn-forms" href="#" target="_blank" rel="noopener" class="btn-rsvp reveal">
+    Confirmar asistencia
+  </a>
+</section>
+
+
+<!-- ── FOOTER ──────────────────────────────────────── -->
+<footer>
+  <p id="footer-txt"></p>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════ -->
+<script>
+
+/* ── Poblar desde config ─────────────────────────── */
+document.getElementById('hero-n1').textContent   = BODA.nombre1;
+document.getElementById('hero-n2').textContent   = BODA.nombre2;
+document.getElementById('hero-tagline').textContent = BODA.tagline;
+document.getElementById('hero-fecha').textContent = BODA.fechaTexto;
+document.getElementById('hero-lugar').textContent = BODA.lugarTexto;
+document.getElementById('alojamiento-txt').innerHTML = '<p>' + BODA.alojamiento + '</p>';
+document.getElementById('rsvp-txt').textContent   = 'Dinos si podrás acompañarnos antes del ' + BODA.rsvpFecha + '.';
+document.getElementById('btn-forms').href = BODA.formsUrl;
+document.getElementById('footer-txt').innerHTML   =
+  BODA.nombre1 + ' <em>♡</em> ' + BODA.nombre2 + ' · 26 · IX · 2026 · ' + BODA.lugarTexto;
+
+/* ── Programa ────────────────────────────────────── */
+const iconosFallback = [
+  '<svg width="28" height="28" fill="none" stroke="#C4735A" stroke-width="1.3" viewBox="0 0 24 24"><path d="M12 21C12 21 4 13.5 4 8.5a5 5 0 0 1 8-4 5 5 0 0 1 8 4c0 5-8 12.5-8 12.5z"/></svg>',
+  '<svg width="28" height="28" fill="none" stroke="#C4735A" stroke-width="1.3" viewBox="0 0 24 24"><path d="M8 2l1 10h6L16 2H8zM9 12c0 3.314 1.343 6 3 6s3-2.686 3-6M12 18v2M9 20h6"/></svg>',
+  '<svg width="28" height="28" fill="none" stroke="#C4735A" stroke-width="1.3" viewBox="0 0 24 24"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>',
+  '<svg width="28" height="28" fill="none" stroke="#C4735A" stroke-width="1.3" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+];
+const pl = document.getElementById('programa-lista');
+BODA.programa.forEach((ev,i) => {
+  const el = document.createElement('div');
+  el.className = 'programa-item';
+  el.innerHTML = `
+    <div class="programa-ilustracion">
+      ${ev.icono ? `<img src="${ev.icono}" alt="">` : iconosFallback[i%4]}
+    </div>
+    <div class="programa-info">
+      <span class="programa-hora">${ev.hora}</span>
+      <h3 class="programa-tit">${ev.titulo}</h3>
+      <p class="programa-desc">${ev.desc}</p>
+    </div>`;
+  pl.appendChild(el);
+});
+
+/* ── Ubicaciones ─────────────────────────────────── */
+function buildMapa(u) {
+  const p = u.zoom;
+  const bbox = [u.lng-p,u.lat-p,u.lng+p,u.lat+p].map(n=>n.toFixed(4)).join('%2C');
+  return `
+    <div class="ubicacion-card">
+      <h3 class="ubicacion-nombre">${u.nombre}</h3>
+      <p class="ubicacion-dir">${u.descripcion}<br><small>${u.direccion}</small></p>
+      <div class="mapa-wrap">
+        <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&layer=mapnik&marker=${u.lat}%2C${u.lng}"
+                loading="lazy" title="Mapa ${u.nombre}"></iframe>
+      </div>
+      <a href="${u.gmapsUrl}" target="_blank" rel="noopener" class="btn-gmaps">
+        <svg width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+        Ver en Google Maps
+      </a>
+    </div>`;
+}
+document.getElementById('ubicaciones-grid').innerHTML =
+  buildMapa(BODA.ubicacion1) + buildMapa(BODA.ubicacion2);
+
+/* ── FAQ ─────────────────────────────────────────── */
+const fl = document.getElementById('faq-lista');
+BODA.faq.forEach(f => {
+  const d = document.createElement('div');
+  d.className = 'faq-item';
+  d.innerHTML = `
+    <button class="faq-btn">
+      <span>${f.p}</span>
+      <svg class="faq-ico" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12h14"/></svg>
+    </button>
+    <div class="faq-resp"><p>${f.r}</p></div>`;
+  fl.appendChild(d);
+  d.querySelector('.faq-btn').addEventListener('click', () => {
+    const o = d.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!o) d.classList.add('open');
+  });
+});
+
+/* ── Countdown ───────────────────────────────────── */
+const T = new Date(BODA.fechaISO);
+function tick() {
+  const diff = T - Date.now();
+  if (diff <= 0) {
+    document.getElementById('countdown').innerHTML =
+      '<span style="font-family:var(--script);font-size:32px;color:var(--accent)">¡Hoy es el gran día! 🌸</span>';
+    return;
+  }
+  const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+        m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
+  ['d','h','m','s'].forEach((k,i)=>
+    document.getElementById('cd-'+k).textContent=String([d,h,m,s][i]).padStart(2,'0'));
+}
+tick(); setInterval(tick,1000);
+
+/* ── Calendario ──────────────────────────────────── */
+const gp = new URLSearchParams({
+  text: 'Boda '+BODA.nombre1+' y '+BODA.nombre2,
+  dates:'20260926T170000Z/20260927T000000Z',
+  details:'¡El gran día! '+BODA.lugarTexto,
+  location:BODA.lugarTexto,
+});
+document.getElementById('btn-gcal').href =
+  'https://calendar.google.com/calendar/render?action=TEMPLATE&'+gp;
+
+document.getElementById('btn-ical').addEventListener('click',()=>{
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0',
+    'BEGIN:VEVENT','DTSTART:20260926T190000','DTEND:20260927T020000',
+    'SUMMARY:Boda '+BODA.nombre1+' y '+BODA.nombre2,
+    'LOCATION:'+BODA.lugarTexto,'DESCRIPTION:¡El gran día!',
+    'END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const a=document.createElement('a');
+  a.href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+  a.download='boda-cris-y-manu.ics'; a.click();
+});
+
+/* ── Hamburger ───────────────────────────────────── */
+const hamBtn=document.getElementById('ham'), navMob=document.getElementById('nav-mob');
+hamBtn.addEventListener('click',()=>{ hamBtn.classList.toggle('open'); navMob.classList.toggle('open'); });
+function closeMob(){ hamBtn.classList.remove('open'); navMob.classList.remove('open'); }
+
+/* ── Scroll reveal ───────────────────────────────── */
+const obs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('vis'); }),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── SOBRE ─────────────────────────────────────────
+   URL personalizada: miweb.com/?para=Juan%20y%20Mar%C3%ADa
+──────────────────────────────────────────────────── */
+(function(){
+  const overlay = document.getElementById('sobre-overlay');
+  const sobre   = document.getElementById('env-sobre');
+  const hint1   = document.getElementById('env-hint1');
+  const hint2   = document.getElementById('env-hint2');
+
+  /* ── Logo / sello ── */
+  const selloInner = document.getElementById('env-sello-inner');
+  if (SOBRE.logoUrl) {
+    selloInner.innerHTML =
+      `<img src="${SOBRE.logoUrl}" class="env-sello-img" alt="Logo">`;
+  } else {
+    selloInner.innerHTML =
+      `<div class="env-sello-disco"><span>C♡M</span></div>`;
+  }
+
+  /* ── Fondo imagen ── */
+  if (SOBRE.fondoUrl) {
+    overlay.classList.add('con-fondo');
+    overlay.style.backgroundImage = `url('${SOBRE.fondoUrl}')`;
+  }
+
+  /* ── Nombre invitado desde URL ── */
+  const param = new URLSearchParams(window.location.search).get('para');
+  if (param) {
+    const nombre = decodeURIComponent(param);
+    const tapaPara = document.getElementById('env-tapa-para');
+    tapaPara.style.display = 'block';
+    document.getElementById('env-tapa-nombre').textContent = nombre;
+  }
+
+  /* ── Un solo clic: abre y entra automáticamente ── */
+  document.body.style.overflow = 'hidden';
+
+  overlay.addEventListener('click', () => {
+    sobre.classList.add('abierto');
+    hint1.style.opacity = '0';
+
+    /* tras la animación de apertura, fade out y entra la web */
+    setTimeout(() => {
+      overlay.style.opacity = '0';
+      overlay.style.transition = 'opacity .7s';
+      document.body.style.overflow = '';
+      setTimeout(() => overlay.remove(), 750);
+    }, 1100); /* 1100ms = duración animación sobre */
+  }, { once: true }); /* solo dispara una vez */
+})();
+
+
+</script>
+
+<!-- ════════════════════════════════════════════════════
+  📸  GUÍA DE FOTOS
+
+  Tienes 5 fotos que añadir:
+  · foto-historia.jpg    → sección "Nuestra historia"
+  · foto-programa.jpg    → sección "Programa"
+  · foto-alojamiento.jpg → sección "Alojarse"
+  · foto-ubicacion.jpg   → sección "Ubicaciones"
+  · foto-faq.jpg         → sección "Preguntas"
+
+  Pasos:
+  1. Guarda tus fotos en la misma carpeta que este HTML
+  2. En cada sección busca la línea:
+       <!-- <img src="foto-XXX.jpg" alt="Cris y Manu"> --
+  3. Descomenta esa línea (quita <!-- y --)
+  4. Opcionalmente, borra el div class="section-photo-ph"
+
+  Para subir a internet (gratis, 30 segundos):
+  · Mete el HTML + todas las fotos en una carpeta
+  · Arrastra la carpeta a https://app.netlify.com/drop
+════════════════════════════════════════════════════ -->
+
+</body>
+</html>
