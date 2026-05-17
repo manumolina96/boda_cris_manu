@@ -324,6 +324,10 @@
       background: var(--cream2);
       position: relative;
     }
+    /* foto grande — para secciones específicas */
+    .section-photo-grande {
+      height: 340px;
+    }
     .section-photo img {
       width: 100%; height: 100%;
       object-fit: cover;
@@ -572,7 +576,8 @@
       nav { padding: 0 40px; }
       .ham { display: none; }
       .nav-links { display: flex; }
-      .section-photo { height: 300px; }
+      .section-photo { height: 420px; }
+      .section-photo-grande { height: 560px; }
       .historia-grid { flex-direction: row; align-items: center; gap: 48px; }
       .historia-foto-inline { max-width: 100%; flex: 1; }
       .ubicaciones-grid { flex-direction: row; }
@@ -1176,7 +1181,7 @@ const BODA = {
 
 <!-- ── PROGRAMA ─────────────────────────────────────── -->
 
-<div class="section-photo">
+<div class="section-photo section-photo-grande">
   <img src="foto-programa.jpg" alt="Cris y Manu">
 </div>
 
