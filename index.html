@@ -1436,21 +1436,26 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
     document.getElementById('env-nombre-body').style.display = 'flex';
   }
 
-  /* ── Un solo clic: abre y entra automáticamente ── */
-  document.body.style.overflow = 'hidden';
+	/* ── Un solo clic: abre y entra automáticamente ── */
+	const sobreKey = 'sobre_abierto_' + (param || 'generico');
 
-  overlay.addEventListener('click', () => {
-    sobre.classList.add('abierto');
-    hint1.style.opacity = '0';
-
-    /* tras la animación de apertura, fade out y entra la web */
-    setTimeout(() => {
-      overlay.style.opacity = '0';
-      overlay.style.transition = 'opacity .7s';
-      document.body.style.overflow = '';
-      setTimeout(() => overlay.remove(), 750);
-    }, 1100); /* 1100ms = duración animación sobre */
-  }, { once: true }); /* solo dispara una vez */
+	if (localStorage.getItem(sobreKey)) {
+	  overlay.remove();
+	  document.body.style.overflow = '';
+	} else {
+	  document.body.style.overflow = 'hidden';
+	  overlay.addEventListener('click', () => {
+		sobre.classList.add('abierto');
+		hint1.style.opacity = '0';
+		localStorage.setItem(sobreKey, '1');
+		setTimeout(() => {
+		  overlay.style.opacity = '0';
+		  overlay.style.transition = 'opacity .7s';
+		  document.body.style.overflow = '';
+		  setTimeout(() => overlay.remove(), 750);
+		}, 1100);
+	  }, { once: true });
+	} /* solo dispara una vez */
 })();
 
 
