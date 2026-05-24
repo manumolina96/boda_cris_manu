@@ -422,15 +422,23 @@
     .programa-lista { margin-top: 8px; }
     .programa-item {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 20px;
       padding: 22px 0;
       border-bottom: 1px solid var(--line);
     }
-    .programa-item:first-child { border-top: 1px solid var(--line); }
+    .programa-item:first-child .programa-ilustracion {
+	  width: 54px;
+	  height: 90px;
+	  min-width: 54px;
+	}
+	.programa-item:first-child .programa-ilustracion img {
+	  object-fit: cover;
+	  object-position: center top;
+	}
     .programa-ilustracion {
-      width: 58px;
-      height: 58px;
+      width: 64px;
+      height: 64px;
       min-width: 58px;
       min-height: 58px;
       flex-shrink: 0;
