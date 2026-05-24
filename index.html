@@ -431,6 +431,8 @@
     .programa-ilustracion {
       width: 58px;
       height: 58px;
+      min-width: 58px;
+      min-height: 58px;
       flex-shrink: 0;
       border-radius: 4px;
       overflow: hidden;
@@ -439,9 +441,10 @@
       display: flex;
       align-items: center;
       justify-content: center;
+	  object-fit: contain;
     }
-    .programa-ilustracion img { width: 100%; height: 100%; object-fit: cover; }
-    .programa-ilustracion svg { opacity: .3; }
+    .programa-ilustracion img { width: 58px; height: 58px; object-fit: cover; display: block; }
+    .programa-ilustracion svg { opacity: .3; flex-shrink: 0; }
     .programa-info { flex: 1; }
     .programa-hora {
       display: block;
@@ -711,7 +714,7 @@
     .env-nombre {
       position: absolute;
       left: 0; right: 0;
-      top: 48%; bottom: 0;
+      top: 52%; bottom: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -736,6 +739,9 @@
       text-align: center;
       padding: 0 20px;
       line-height: 1.3;
+	  width: 73%;
+	  word-break: break-word;
+	  white-space: normal;
     }
 
     /* 3 — Tapa (pentágono SVG, se pliega hacia arriba) */
@@ -1002,14 +1008,14 @@ const BODA = {
   lugarTexto: "Santa Eufemia, Córdoba",
   tagline:    "HAY MOMENTOS ÚNICOS EN LA VIDA, LLENOS DE MAGIA. QUEREMOS QUE NUESTRA BODA SEA UNO DE ELLOS Y POR ESO NOS GUSTARÍA QUE NOS ACOMPAÑES EN ESE DÍA TAN ESPECIAL",
   programa: [
-    { hora:"19:00", titulo:"Ceremonia",            desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"icono_ceremonia.jpg" },
-    { hora:"20:00", titulo:"🚌 Bus a la finca",     desc:"Salida del autobús desde la iglesia hacia el Cortijo Navalobos.", icono:"icono_bus.jpg" },
+    { hora:"19:00", titulo:"Ceremonia",            desc:"Iglesia de Nuestra Señora de la Encarnación, Santa Eufemia.", icono:"icono_ceremonia.png" },
+    { hora:"20:00", titulo:"🚌 Bus a la finca",     desc:"Salida del autobús desde la iglesia hacia el Cortijo Navalobos.", icono:"icono_bus.png" },
     { hora:"21:00", titulo:"Cóctel de bienvenida", desc:"Llegada a la finca. Aperitivos y bebidas de bienvenida en los jardines.", icono:"icono_coctel.jpg" },
-    { hora:"23:00", titulo:"Banquete",             desc:"Cena-banquete con los mejores productos de la tierra. Habrá sorpresas.", icono:"icono_banquete.jpg" },
-    { hora:"01:00", titulo:"Fiesta",               desc:"¡A bailar y disfrutar! La pista abre hasta que el cuerpo aguante.", icono:"icono_fiesta.jpg" },
-    { hora:"3·5·7h", titulo:"🚌 Buses de vuelta",  desc:"Salidas de regreso a las 3:00, 5:00 y 7:00 de la mañana.", icono:"icono_bus.jpg" },
+    { hora:"23:00", titulo:"Cena",             desc:"Cena con los mejores productos de la tierra. Habrá sorpresas.", icono:"icono_banquete.jpg" },
+    { hora:"01:00", titulo:"Fiesta",               desc:"Brindaremos, bailaremos y celebraremos juntos hasta que el cuerpo aguante", icono:"icono_fiesta.jpg" },
+    { hora:"3·5·7h", titulo:"🚌 Buses de vuelta",  desc:"Salidas de regreso a las 3:00, 5:00 y 7:00 de la mañana.", icono:"icono_bus.png" },
   ],
-  alojamiento: "Para que la organización sea más sencilla para todos, hemos reservado casas rurales cercanas a la finca. Si necesitas alojamiento, dinos para cuántas personas y cuántos días al confirmar tu asistencia y te damos todos los detalles sin compromiso.",
+  alojamiento: "Para que la organización sea más sencilla para todos, hemos reservado casas rurales. Si necesitas alojamiento, dinos para cuántas personas y cuántos días al confirmar tu asistencia y te damos todos los detalles sin compromiso.",
   ubicacion1: {
     nombre:"Ceremonia",
     descripcion:"Iglesia de Nuestra Señora de la Encarnación",
@@ -1033,16 +1039,12 @@ const BODA = {
       r:"Sí. El autobús sale desde la iglesia a las 20:00, tras la ceremonia. Para el regreso hay salidas a las 3:00, 5:00 y 7:00 de la mañana." },
     { p:"¿Hay aparcamiento en la finca?",
       r:"Sí, hay aparcamiento gratuito y vigilado para los que vayáis en coche propio." },
-    { p:"¿Podemos llevar a los niños?",
-      r:"¡Claro que sí! Los niños son bienvenidos. Habrá una zona habilitada para ellos durante la cena." },
     { p:"¿Hay menú para alergias o intolerancias?",
       r:"Sí. Indícanos cualquier restricción alimentaria al confirmar asistencia y lo gestionamos sin problema." },
     { p:"¿Qué tiempo hará en septiembre?",
-      r:"En Córdoba en septiembre suele hacer calor durante el día, pero la ceremonia es a las 19h y por la madrugada refresca bastante. Llevad algo de abrigo ligero para la fiesta." },
+      r:"En Santa Eufemia en septiembre suele hacer calor durante el día, pero la ceremonia es a las 19h y por la madrugada refresca bastante. Llevad algo de abrigo ligero para la fiesta." },
     { p:"¿Hasta cuándo puedo confirmar?",
-      r:"Os pedimos confirmación antes del 30 de junio de 2026. ¡Gracias!" },
-    { p:"¿Qué regalo os haría más ilusión?",
-      r:"Vuestro acompañamiento ya es el mejor regalo. Si queréis contribuir a nuestra luna de miel os pasamos los detalles al confirmar." },
+      r:"Os pedimos confirmación antes del 30 de agosto de 2026. Podeis realizar la confirmación en el link que hay más abajo ¡Gracias!" },
   ],
   formsUrl:  "https://docs.google.com/forms/d/e/1FAIpQLSfD-lUVbsurYCJ2O61wr3hS3GKvI9pePXXYkKGp8aKjYWCOjw/viewform?usp=publish-editor",
   rsvpFecha: "30 de junio de 2026",
@@ -1298,7 +1300,7 @@ BODA.programa.forEach((ev,i) => {
   el.className = 'programa-item';
   el.innerHTML = `
     <div class="programa-ilustracion">
-      ${ev.icono ? `<img src="${ev.icono}" alt="">` : iconosFallback[i%4]}
+      ${ev.icono ? `<img src="${ev.icono}" alt="" style="width:100%;height:100%;object-fit:cover;display:block;flex-shrink:0">` : iconosFallback[i%4]}
     </div>
     <div class="programa-info">
       <span class="programa-hora">${ev.hora}</span>
